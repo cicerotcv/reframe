@@ -49,7 +49,7 @@ def create_background(image):
 
     background = resize(image)
     background = reframe(background)
-    background = apply_blur(background, size//10)
+    background = apply_blur(background, size//15)
 
     return background
 
