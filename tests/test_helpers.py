@@ -1,7 +1,7 @@
-import numpy as np
-from reframe.helpers import (apply_blur, crop_aspect, get_aspect, get_shape,
-                             load_image, rescale)
 from pytest import approx
+from reframe.helpers import (apply_blur, crop_aspect, get_aspect, get_shape,
+                             rescale)
+
 from .auxiliar import create_image
 
 

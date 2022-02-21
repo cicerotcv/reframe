@@ -5,6 +5,20 @@ def load_image(path: str):
     return cv2.imread(path)
 
 
+def save_image(path: str, image):
+    cv2.imwrite(path, image)
+    print(f'Image saved at "{path}"')
+
+
+def show_image(image):
+    width, height = get_shape(image)
+    greater = max(width, height)
+    scale = 640/greater
+    cv2.imshow("Output", rescale(image, scale))
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+
+
 def get_shape(image):
     height, width, _ = image.shape
     return (width, height)
