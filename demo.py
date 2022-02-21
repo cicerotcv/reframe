@@ -32,6 +32,3 @@ def show_image(image):
 
 if __name__ == "__main__":
     main()
-
-    # todo: flake 8
-    # todo: pytest

@@ -24,7 +24,7 @@ optional arguments:
   -o OUTPUT, --output OUTPUT
                         output image destination. [Defaults to "current\dir\output.png"]
   -a ASPECT, --aspect ASPECT
-                        desired aspect ration. 
+                        desired aspect ration.
                         [Defaults to 1]
                         [Formats d, d.d, d/d, d:d]
                         [Examples 1, 1.5, 16/9, 16:9]
@@ -37,7 +37,11 @@ optional arguments:
 ```shell
 $ python -m reframe -i path/to/image.png --save --show -a 16:9
 ```
-<!-- 
+
 ## Results
 
-![demo image](demo.png) -->
+```shell
+$ python -m reframe -i tests/test.png -o demo.png --aspect 2 --save
+```
+
+![demo image](demo.png)
