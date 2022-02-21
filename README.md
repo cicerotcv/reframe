@@ -27,7 +27,7 @@ optional arguments:
                         desired aspect ration.
                         [Defaults to 1]
                         [Formats d, d.d, d/d, d:d]
-                        [Examples 1, 1.5, 16/9, 16:9]
+                        [Exemples 1, 1.5, 16/9, 16:9]
   --save                Save output file.
   --show                Show output file.
 ```
