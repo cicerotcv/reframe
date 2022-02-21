@@ -12,12 +12,32 @@ Changes any supported image's aspect ratio to 1 by resizing the original image t
 $ pip install -r requirements.txt
 ```
 
+## Arguments
+
+```
+usage: reframe [-h] [-i INPUT] [-o OUTPUT] [-a ASPECT] [--save] [--show]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -i INPUT, --input INPUT
+                        input image
+  -o OUTPUT, --output OUTPUT
+                        output image destination. [Defaults to "current\dir\output.png"]
+  -a ASPECT, --aspect ASPECT
+                        desired aspect ration. 
+                        [Defaults to 1]
+                        [Formats d, d.d, d/d, d:d]
+                        [Examples 1, 1.5, 16/9, 16:9]
+  --save                Save output file.
+  --show                Show output file.
+```
+
 ## Usage
 
 ```shell
-$ python demo.py path/to/source-image.png
+$ python -m reframe -i path/to/image.png --save --show -a 16:9
 ```
-
+<!-- 
 ## Results
 
-![demo image](demo.png)
+![demo image](demo.png) -->
