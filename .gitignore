@@ -8,3 +8,4 @@
 *.jpeg
 
 !demo.png
+!tests/test.png

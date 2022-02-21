@@ -1,14 +1,18 @@
+import os
 from sys import argv
-from reframe import process_image, load_image
+
 import cv2
+
+from reframe import process_image
 
 
 def main():
     path = argv[1]
-    image = load_image(path)
-    output = process_image(image)
+    aspect = float(argv[2])
+    output = process_image(path, aspect)
     show_image(output)
-    save_image(output, 'output.png')
+    cwd = os.getcwd()
+    save_image(output, f'{cwd}/output.png')
 
 
 def save_image(image, filename='output.png'):

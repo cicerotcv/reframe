@@ -1,62 +1,27 @@
 # -*- encoding::utf-8 -*-
-import cv2
+from .helpers import apply_blur, crop_aspect, get_shape, load_image, rescale
 
 
-def load_image(path: str):
-    return cv2.imread(path)
+def create_background(image, desired_aspect):
 
+    im_width, im_height = get_shape(image)
+    im_aspect = im_width/im_height
 
-def resize(image):
-    height, width, _ = image.shape
+    scale = max(desired_aspect, im_aspect) / min(desired_aspect, im_aspect)
 
-    scale = max(width, height)/min(width, height)
+    # makes background big enough to fit the desired aspect
+    background = rescale(image, scale=scale)
+    background = crop_aspect(background, aspect=desired_aspect)
 
-    new_width = round(width*scale)
-    new_height = round(height*scale)
-    new_shape = (new_width, new_height)
-
-    return cv2.resize(image, new_shape)
-
-
-def reframe(image):
-    height, width, _ = image.shape
-
-    size = min(width, height)
-
-    px = round((width - size)/2)
-    px = max(0, px)
-
-    py = round((height - size)/2)
-    py = max(0, py)
-
-    output = image.copy()
-    output = output[py:py + size, px: px + size]
-    return output
-
-
-def apply_blur(image, size):
-    if size % 2 == 0:
-        size += 1
-    kernel_size = (size, size)
-    sigma_x = 0
-    image = cv2.GaussianBlur(image, kernel_size, sigma_x)
-    return image
-
-
-def create_background(image):
-    height, width, _ = image.shape
-    size = max(height, width)
-
-    background = resize(image)
-    background = reframe(background)
-    background = apply_blur(background, size//15)
+    kernel_size = max(get_shape(background)) // 15
+    background = apply_blur(background, kernel_size)
 
     return background
 
 
 def place_image(background, image):
-    im_height, im_width, _ = image.shape
-    bg_height, bg_width, _ = background.shape
+    im_width, im_height = get_shape(image)
+    bg_width, bg_height = get_shape(background)
 
     px = round((bg_height - im_height)/2)
     py = round((bg_width - im_width)/2)
@@ -73,6 +38,7 @@ def place_image(background, image):
     return output
 
 
-def process_image(image):
-    background = create_background(image)
+def process_image(path, aspect):
+    image = load_image(path)
+    background = create_background(image, aspect)
     return place_image(background, image)
